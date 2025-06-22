@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Stripe - Pagos Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Selector de Modo -->
+    <section id="modeSelector" class="mode-selector">
+        <h1>🎯 Tutorial de Stripe</h1>
+        <h2>Selecciona el modo de operación</h2>
+        <div class="mode-cards">
+            <div class="mode-card" onclick="selectMode('test')">
+                <div class="mode-icon">🧪</div>
+                <h3>Modo Prueba</h3>
+                <p>Para desarrollo y testing</p>
+                <ul>
+                    <li>✅ Usa tarjetas de prueba</li>
+                    <li>✅ No cobra dinero real</li>
+                    <li>✅ Ideal para aprender</li>
+                    <li>📋 Tarjeta prueba: 4242 4242 4242 4242</li>
+                </ul>
+            </div>
+            
+            <div class="mode-card" onclick="selectMode('live')">
+                <div class="mode-icon">💳</div>
+                <h3>Modo Producción</h3>
+                <p>Para pagos reales</p>
+                <ul>
+                    <li>⚠️ Cobra dinero real</li>
+                    <li>✅ Tarjetas reales</li>
+                    <li>✅ Transacciones verdaderas</li>
+                    <li>🔒 Requiere cuenta verificada</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aplicación Principal -->
+    <main id="mainApp" style="display: none;">
+        <header>
+            <h1>🛒 Tienda Tutorial Stripe</h1>
+            <div class="mode-indicator">
+                Modo: <span id="currentMode"></span>
+            </div>
+        </header>
+
+        <!-- Estado de Conexión -->
+        <div id="connectionStatus" class="connection-status">
+            <div class="status-content">
+                <span class="status-icon">⏳</span>
+                <span class="status-text">Verificando conexión...</span>
+            </div>
+        </div>
+
+        <!-- Productos -->
+        <section class="products-section">
+            <h2>📦 Productos Disponibles</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se cargarán dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Carrito -->
+        <section class="cart-section">
+            <h2>🛒 Tu Carrito</h2>
+            <div id="cartItems" class="cart-items">
+                <p class="empty-cart">El carrito está vacío</p>
+            </div>
+            <div class="cart-total" id="cartTotal" style="display: none;">
+                <strong>Total: </strong><span id="totalAmount">€0.00</span>
+            </div>
+            <button id="checkoutButton" class="checkout-button" style="display: none;" onclick="procederAlPago()">
+                Proceder al Pago
+            </button>
+        </section>
+
+        <!-- Historial de Transacciones -->
+        <section class="transactions-section">
+            <h2>📋 Historial de Transacciones</h2>
+            <div id="transactionsList" class="transactions-list">
+                <p class="no-transactions">No hay transacciones aún</p>
+            </div>
+        </section>
+
+        <!-- Panel de Debug -->
+        <section id="debugPanel" class="debug-panel">
+            <h3>🔧 Panel de Debug</h3>
+            <div class="debug-content">
+                <div class="debug-item">
+                    <strong>Stripe Public Key:</strong>
+                    <code id="debugPublicKey">No configurada</code>
+                </div>
+                <div class="debug-item">
+                    <strong>API Endpoint:</strong>
+                    <code id="debugEndpoint">No configurado</code>
+                </div>
+                <div class="debug-item">
+                    <strong>Último Error:</strong>
+                    <code id="debugError">Ninguno</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Información Educativa -->
+        <section class="info-section">
+            <h2>📚 Cómo Funciona Stripe</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>1. Cliente Selecciona</h3>
+                    <p>El usuario elige productos y procede al pago</p>
+                </div>
+                <div class="info-card">
+                    <h3>2. Crear Session</h3>
+                    <p>Tu servidor crea una sesión de pago segura</p>
+                </div>
+                <div class="info-card">
+                    <h3>3. Checkout Seguro</h3>
+                    <p>Stripe maneja los datos de tarjeta de forma segura</p>
+                </div>
+                <div class="info-card">
+                    <h3>4. Confirmación</h3>
+                    <p>Recibes webhook con confirmación del pago</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mensajes -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <!-- Scripts -->
+    <script src="env.js"></script>
+    <script src="config.js"></script>
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
