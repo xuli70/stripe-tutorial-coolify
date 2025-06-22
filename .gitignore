@@ -1,0 +1,39 @@
+# Variables de entorno
+.env
+.env.local
+.env.production
+env.js
+
+# Claves y certificados
+*.pem
+*.key
+*.crt
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencias (si agregas Node.js)
+node_modules/
+
+# Build
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporales
+*.tmp
+*.temp
+
+# Stripe CLI (si lo usas localmente)
+stripe-cli/
+.stripe/
